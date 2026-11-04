@@ -1,0 +1,392 @@
+{
+  "title": "Harmonic Circles",
+  "slug": "harmonic-circles",
+  "kind": "topic",
+  "courseSlug": "ukulele",
+  "format": "lesson",
+  "description": "Learn the repeating four-chord circles behind hundreds of songs, with inline diagrams for every chord.",
+  "order": 1,
+  "lesson": {
+    "intro": [
+      "Shuffle through any ukulele songbook and the same short chord loops keep reappearing — in folk songs and pop hits, hymns and jingles. These loops are called **harmonic circles**: progressions that cycle around and land back where they started. Learn a few circles and you can play hundreds of songs.",
+      "This chapter teaches all twenty-four circles — the twelve major-key circles (C, G, F, B flat, D, A, E flat, A flat, E, B, D flat, and F sharp) plus their twelve minor-key twins from C minor to B minor — with every diagram on the page, plus practice drills, strumming patterns, and real songs to try them with. All you need is standard tuning (G–C–E–A).",
+      "Each major circle below ends with a **Songs to try** box — real recordings you can play along with as soon as the shapes feel steady."
+    ],
+    "sections": [
+      {
+        "heading": "What Is a Harmonic Circle?",
+        "paragraphs": [
+          "A **harmonic circle** is a progression designed to repeat: the end flows straight back into the beginning, so you can loop it as long as you like. Strum the loop once for an introduction; loop it for three minutes and you have a song.",
+          "Circles run on **tension and release**. Some chords feel settled, like sitting down; others lean forward, asking to resolve. When the last chord hands you back to the first, you feel a small click of arrival — and the urge to go around again. **Try it now**: strum C for four slow beats, G for four, then C again. That pull back home is the engine of every circle in this chapter.",
+          "Musicians number circle chords with **scale degrees** in Roman numerals: in the key of C, C is **I** (“one”) and A minor is **vi** (“six”). Uppercase means major, lowercase means minor. The most famous circle — C, A minor, F, G — is **I–vi–IV–V**, and those numerals describe the same circle in every key."
+        ]
+      },
+      {
+        "heading": "Circle in C — the 50s Progression",
+        "paragraphs": [
+          "If you learn one circle, learn **C – A minor – F – G**. It carried hundreds of 1950s ballads — the *50s progression* — and still drives pop, worship, and film music today. On ukulele it is gentle: C and A minor each need one finger, F needs two. When the loop feels smooth, try singing over it — the 50s progression forgives almost any melody.",
+          "**Songs to try**: *Stand by Me*, *Blue Moon*, and *Unchained Melody* all ride the I–vi–IV–V loop. Pick one recording, transpose to C, and strum one slow bar per chord — feel the G pull you home.",
+          "Notice how the G chord at the end leans forward, almost pulling your hand back to C. That pull is the dominant V chord doing its centuries-old job.",
+          "Loop the sequence without pausing between rounds — one slow bar of four strums per chord:"
+        ],
+        "progressions": [
+          {
+            "name": "Circle in C — the 50s progression",
+            "key": "C",
+            "degrees": ["I", "vi", "IV", "V"],
+            "chords": ["C major", "A minor", "F major", "G major"]
+          }
+        ]
+      },
+      {
+        "heading": "Circle in G — the Singing Key",
+        "paragraphs": [
+          "Move the same I–vi–IV–V idea to G: **G – E minor – C – D**. The chords ring bright, and the key sits well for most voices with no capo needed. E minor and D are the new shapes here — give the Em fret-2-to-4 stretch and D's three-finger stack a day or two and they settle in.",
+          "**Songs to try**: the chorus of Ed Sheeran's *Perfect* loops G–Em–C–D with a capo on 1 (recorded in Ab) — capo up and strum along with the recording. *Stand by Me* fits here too if you transpose it up to G.",
+          "Isolate the least familiar change first — E minor to C, a dozen slow loops — then run the full circle:"
+        ],
+        "progressions": [
+          {
+            "name": "Circle in G — the singing key",
+            "key": "G",
+            "degrees": ["I", "vi", "IV", "V"],
+            "chords": ["G major", "E minor", "C major", "D major"]
+          }
+        ]
+      },
+      {
+        "heading": "Circle in F — Meeting B Flat",
+        "paragraphs": [
+          "The third circle lives in F: **F – D minor – B flat – C**. F is warm and beginner-friendly, and this circle introduces B flat in the gentlest company: one index mini-barre across E and A at fret 1, middle and ring covering C and G.",
+          "**Songs to try**: *Earth Angel* is the classic doo-wop I–vi–IV–V — transpose its loop to F. Then search video sites for an “F D minor B flat C backing track” and take a full chorus over it.",
+          "D minor is the darkest chord in this chapter — hear how the circle shadows on D minor, brightens through B flat, and lands home on C moving back to F.",
+          "Keep the thumb relaxed, roll the index finger slightly onto its side, and let hand weight — not a squeeze — fret the barre:"
+        ],
+        "progressions": [
+          {
+            "name": "Circle in F — meeting B flat",
+            "key": "F",
+            "degrees": ["I", "vi", "IV", "V"],
+            "chords": ["F major", "D minor", "Bb / A# major", "C major"]
+          }
+        ]
+      },
+      {
+        "heading": "Circle in Bb — Flat-Key Fluency",
+        "paragraphs": [
+          "B flat was the newcomer in F — now it is home. The circle in B flat runs **B flat – G minor – E flat – F**, and its two new shapes share a skeleton: the G string rings open and the index holds the A string's first fret in both. G minor stacks the middle on the C string's second fret and the ring on the E string's third fret; E flat keeps the ring on the E string's third fret and moves only the middle up to the C string's third fret.",
+          "**Songs to try**: transpose *Earth Angel* up to B flat — doo-wop loves flat keys — then search video sites for a “B flat G minor E flat F backing track” and ride a full chorus. Jazz players live in these keys, so this circle opens standards next.",
+          "Use the built-in pivot: B flat to G minor keeps the middle on the C string's second fret and the index on the A string's first fret — move only the other fingers, then run the full circle:"
+        ],
+        "progressions": [
+          {
+            "name": "Circle in Bb — flat-key fluency",
+            "key": "Bb",
+            "degrees": ["I", "vi", "IV", "V"],
+            "chords": ["Bb / A# major", "G minor", "Eb / D# major", "F major"]
+          }
+        ]
+      },
+      {
+        "heading": "Circle in D — Your First Barre",
+        "paragraphs": [
+          "The circle in D — **D – B minor – G – A** — is the busker's key: bright, loud, and made for singing over. D stacks three fingers across the second fret — index, middle, and ring on the G, C, and E strings while the A rings open — and A needs just two fingers on the top strings. The price of admission is B minor, your first full barre: the index lays across the C, E, and A strings at the second fret while the ring reaches the G string's fourth fret.",
+          "**Songs to try**: transpose *Stand by Me* to D and strum it like a street performer. Then search for a “D B minor G A backing track” and take the verse. If B minor buzzes, roll the index onto its bony edge and drop the thumb low behind the neck.",
+          "Isolate the hard move first: loop D to B minor slowly — the C and E strings stay at the second fret, only the fingers change — a dozen times, then run the full circle:"
+        ],
+        "progressions": [
+          {
+            "name": "Circle in D — your first barre",
+            "key": "D",
+            "degrees": ["I", "vi", "IV", "V"],
+            "chords": ["D major", "B minor", "G major", "A major"]
+          }
+        ]
+      },
+      {
+        "heading": "Circle in A — Stand by Me's Home Key",
+        "paragraphs": [
+          "Here is the payoff: *Stand by Me* was recorded in A, so **A – F-sharp minor – D – E** lets you play along with the original record, in the original key. A is an easy two-finger shape, and F-sharp minor simply keeps both fingers where they are and adds the ring on the E string's second fret.",
+          "**Songs to try**: put on the Ben E. King recording and strum A–F#m–D–E along with the band. The hurdle is E major, one of the hardest shapes in this chapter: the index holds the A string's second fret while the middle, ring, and pinky climb the G, C, and E strings at the fourth fret. Give it its own one-minute drill before joining the loop.",
+          "Loop A to F-sharp minor until the added ring finger lands clean, fold in D and E one at a time, then run the full circle:"
+        ],
+        "progressions": [
+          {
+            "name": "Circle in A — Stand by Me's home key",
+            "key": "A",
+            "degrees": ["I", "vi", "IV", "V"],
+            "chords": ["A major", "Gb / F# minor", "D major", "E major"]
+          }
+        ]
+      },
+      {
+        "heading": "Circle in Eb — Motown Soul",
+        "paragraphs": [
+          "Soul and Motown live in E flat: **E flat – C minor – A flat – B flat**. E flat and B flat are old friends from the B-flat circle; the newcomers are C minor — G string open, three fingers stacked across the third fret on the C, E, and A strings — and A flat, the biggest stretch yet: the index barres the C and A strings at the third fret while the middle takes the E string's fourth fret and the ring reaches the G string's fifth fret.",
+          "**Songs to try**: transpose *Stand by Me* down to E flat and feel the Motown groove — half that catalog sits in E flat and B flat for the horns. Then search video sites for an “E flat C minor A flat B flat backing track” and ride a full chorus.",
+          "Anchor the changes with two index pivots — B flat to E flat keeps the index on the A string's first fret, C minor to A flat keeps the index on the C string's third fret — then run the full circle:"
+        ],
+        "progressions": [
+          {
+            "name": "Circle in Eb — motown soul",
+            "key": "Eb",
+            "degrees": ["I", "vi", "IV", "V"],
+            "chords": [
+              "Eb / D# major",
+              "C minor",
+              "Ab / G# major",
+              "Bb / A# major"
+            ]
+          }
+        ]
+      },
+      {
+        "heading": "Circle in Ab — Four-Flat Territory",
+        "paragraphs": [
+          "Four flats deep: **A flat – F minor – D flat – E flat**. A flat and E flat carry over from the last circle; F minor is a gentle stretch — index on the G string's first fret, middle on the E string's first fret, pinky on the A string's third fret, C string open — and D flat is a pinky-reach barre: the index lays across the G, C, and E strings at the first fret while the pinky lands the A string's fourth fret.",
+          "**Songs to try**: transpose *Earth Angel* to A flat for a gospel-choir glow, then search for an “A flat F minor D flat E flat backing track”. Jazz and gospel players call these flat keys home — you are learning their language.",
+          "Use the G-string anchor: F minor to D flat keeps the index on the G string's first fret — hold it while the other fingers reset — then run the full circle:"
+        ],
+        "progressions": [
+          {
+            "name": "Circle in Ab — four-flat territory",
+            "key": "Ab",
+            "degrees": ["I", "vi", "IV", "V"],
+            "chords": [
+              "Ab / G# major",
+              "F minor",
+              "Db / C# major",
+              "Eb / D# major"
+            ]
+          }
+        ]
+      },
+      {
+        "heading": "Circle in E — Rock's Home Key",
+        "paragraphs": [
+          "Rock's home key: **E – C-sharp minor – A – B**. E major returns from the A circle and A is easy; C-sharp minor pairs the index and middle on the G and C strings' first fret with the pinky stretching to the A string's fourth fret, E string open — and B is a compact barre: index across the E and A strings at the second fret, middle on the C string's third fret, ring on the G string's fourth fret.",
+          "**Songs to try**: transpose the 50s progression to E and strum it like a bar-band encore — E, A, and B powered a thousand rock songs. Then search for an “E C sharp minor A B backing track” and take the verse.",
+          "Anchor on the A string: B to E keeps the index on the A string's second fret — the rest of the hand rebuilds around it — then run the full circle:"
+        ],
+        "progressions": [
+          {
+            "name": "Circle in E — rock's home key",
+            "key": "E",
+            "degrees": ["I", "vi", "IV", "V"],
+            "chords": ["E major", "Db / C# minor", "A major", "B major"]
+          }
+        ]
+      },
+      {
+        "heading": "Circle in B — Five-Sharp Summit",
+        "paragraphs": [
+          "Five sharps up: **B – G-sharp minor – E – F-sharp**. B and E carry over from the last circle; G-sharp minor uses all four fingers — index on the G string's first fret, middle on the A string's second fret, ring on the C string's third fret, pinky on the E string's fourth fret — and F-sharp is a stretch-barre: the index covers the C and A strings at the first fret, the middle takes the E string's second fret, and the ring reaches the G string's third fret.",
+          "**Songs to try**: transpose *Stand by Me* to B and hear it go glassy and bright — high keys shimmer on the ukulele's small body. Then search for a “B G sharp minor E F sharp backing track” and play a full chorus without stopping.",
+          "Trust the pinky: G-sharp minor to E keeps the pinky on the E string's fourth fret — plant it and swing the other fingers home — then run the full circle:"
+        ],
+        "progressions": [
+          {
+            "name": "Circle in B — five-sharp summit",
+            "key": "B",
+            "degrees": ["I", "vi", "IV", "V"],
+            "chords": ["B major", "Ab / G# minor", "E major", "Gb / F# major"]
+          }
+        ]
+      },
+      {
+        "heading": "Circle in Db — Five-Flat Summit",
+        "paragraphs": [
+          "Five flats deep, the pianist's key: **D flat – B-flat minor – G flat – A flat**. D flat and A flat are old friends, and G flat returns from the B circle; the only newcomer is B-flat minor — a full index barre across the C, E, and A strings at the first fret with the ring on the G string's third fret.",
+          "**Songs to try**: transpose *Earth Angel* down to D flat for late-night warmth — worship pianists live in D flat because the black-key shapes sit under the hands. Then search for a “D flat B flat minor G flat A flat backing track” and take a full chorus.",
+          "This circle barely moves the hand: B-flat minor to G flat keeps the ring on the G string's third fret and the index barre on the C and A strings' first fret — just add the middle on the E string's second fret — then run the full circle:"
+        ],
+        "progressions": [
+          {
+            "name": "Circle in Db — five-flat summit",
+            "key": "Db",
+            "degrees": ["I", "vi", "IV", "V"],
+            "chords": [
+              "Db / C# major",
+              "Bb / A# minor",
+              "Gb / F# major",
+              "Ab / G# major"
+            ]
+          }
+        ]
+      },
+      {
+        "heading": "Circle in F# — The Final Frontier",
+        "paragraphs": [
+          "The twelfth and final key: **F-sharp – D-sharp minor – B – C-sharp**. (The diagrams spell three of them the flat way — G flat, E-flat minor, D flat — same pitches, same fingers.) Everything is familiar except D-sharp minor, and even it is friendly: all four fingers in a descending staircase — ring on the G string's third fret, pinky on the C string's third fret, middle on the E string's second fret, index on the A string's first fret.",
+          "**Songs to try**: the victory lap — transpose *Stand by Me* to F-sharp, then play all twelve major keys in a row, C to F-sharp, one chorus each. Search for an “F sharp D sharp minor B C sharp backing track” to close out the set.",
+          "Three fingers never move: F-sharp to D-sharp minor keeps the ring on the G string's third fret, the middle on the E string's second fret, and the index on the A string's first fret — only the C string changes hands — then run the full circle:"
+        ],
+        "progressions": [
+          {
+            "name": "Circle in F# — the final frontier",
+            "key": "F#",
+            "degrees": ["I", "vi", "IV", "V"],
+            "chords": [
+              "Gb / F# major",
+              "Eb / D# minor",
+              "B major",
+              "Db / C# major"
+            ]
+          }
+        ]
+      },
+      {
+        "heading": "Minor Circles in C–Eb",
+        "paragraphs": [
+          "Flip a circle to its darker twin: in a minor key the home chord is minor, and the loop runs **i – VI – III – VII**. In A minor that is A minor – F – C – G — the same four shapes as C's circle, starting from a different home.",
+          "The twelve loops below are the minor twin of the major set — one canonical circle per minor key. Open any of them in the explorer to see all seven diatonic chords, including the diminished chord on the second degree."
+        ],
+        "progressions": [
+          {
+            "name": "Circle in C minor — the relative's turn",
+            "key": "C",
+            "type": "minor",
+            "degrees": ["i", "VI", "III", "VII"],
+            "chords": [
+              "C minor",
+              "Ab / G# major",
+              "Eb / D# major",
+              "Bb / A# major"
+            ]
+          },
+          {
+            "name": "Circle in C# minor — a half step up",
+            "key": "C#",
+            "type": "minor",
+            "degrees": ["i", "VI", "III", "VII"],
+            "chords": ["Db / C# minor", "A major", "E major", "B major"]
+          },
+          {
+            "name": "Circle in D minor — the saddest key",
+            "key": "D",
+            "type": "minor",
+            "degrees": ["i", "VI", "III", "VII"],
+            "chords": ["D minor", "Bb / A# major", "F major", "C major"]
+          },
+          {
+            "name": "Circle in Eb minor — six flats deep",
+            "key": "Eb",
+            "type": "minor",
+            "degrees": ["i", "VI", "III", "VII"],
+            "chords": [
+              "Eb / D# minor",
+              "B major",
+              "Gb / F# major",
+              "Db / C# major"
+            ]
+          }
+        ]
+      },
+      {
+        "heading": "Minor Circles in E–G",
+        "paragraphs": [
+          "The middle four minor keys keep the same i – VI – III – VII loop. Notice how many shapes you already know: E minor's circle is C, G, D, and E minor — four old friends in a new order."
+        ],
+        "progressions": [
+          {
+            "name": "Circle in E minor — the guitarist's minor",
+            "key": "E",
+            "type": "minor",
+            "degrees": ["i", "VI", "III", "VII"],
+            "chords": ["E minor", "C major", "G major", "D major"]
+          },
+          {
+            "name": "Circle in F minor — four flats down",
+            "key": "F",
+            "type": "minor",
+            "degrees": ["i", "VI", "III", "VII"],
+            "chords": [
+              "F minor",
+              "Db / C# major",
+              "Ab / G# major",
+              "Eb / D# major"
+            ]
+          },
+          {
+            "name": "Circle in F# minor — relative of A",
+            "key": "F#",
+            "type": "minor",
+            "degrees": ["i", "VI", "III", "VII"],
+            "chords": ["Gb / F# minor", "D major", "A major", "E major"]
+          },
+          {
+            "name": "Circle in G minor — two flats down",
+            "key": "G",
+            "type": "minor",
+            "degrees": ["i", "VI", "III", "VII"],
+            "chords": ["G minor", "Eb / D# major", "Bb / A# major", "F major"]
+          }
+        ]
+      },
+      {
+        "heading": "Minor Circles in G#–B",
+        "paragraphs": [
+          "The final four minor keys, including A minor — the most-played minor key of all, home to *Stairway to Heaven*, *House of the Rising Sun*, and half the singer-songwriter shelf. Run all twelve minor loops back to back to close out the set."
+        ],
+        "progressions": [
+          {
+            "name": "Circle in G# minor — relative of B",
+            "key": "G#",
+            "type": "minor",
+            "degrees": ["i", "VI", "III", "VII"],
+            "chords": ["Ab / G# minor", "E major", "B major", "Gb / F# major"]
+          },
+          {
+            "name": "Circle in A minor — the people's minor",
+            "key": "A",
+            "type": "minor",
+            "degrees": ["i", "VI", "III", "VII"],
+            "chords": ["A minor", "F major", "C major", "G major"]
+          },
+          {
+            "name": "Circle in Bb minor — five flats deep",
+            "key": "Bb",
+            "type": "minor",
+            "degrees": ["i", "VI", "III", "VII"],
+            "chords": [
+              "Bb / A# minor",
+              "Gb / F# major",
+              "Db / C# major",
+              "Ab / G# major"
+            ]
+          },
+          {
+            "name": "Circle in B minor — relative of D",
+            "key": "B",
+            "type": "minor",
+            "degrees": ["i", "VI", "III", "VII"],
+            "chords": ["B minor", "G major", "D major", "A major"]
+          }
+        ]
+      },
+      {
+        "heading": "Practicing Circles Cleanly",
+        "paragraphs": [
+          "Knowing the chords is half the skill; the other half is *changing* between them without breaking time. Practice the changes, not just the grips — a chord you can form in five seconds is not yet a chord you can play.",
+          "Start with the **slow-change drill**: loop two neighboring chords back and forth, one strum each, keeping every note ringing. Buzz or mute? Slow down instead of squeezing — clean tone at half speed becomes clean tone at full speed within days.",
+          "Next, learn to see **pivot fingers**: fingers that stay put, or barely move, between two shapes. From A minor to F, your middle finger stays planted on the G string's second fret — just add the index on the E string's first fret. From F to D minor, both fingers stay exactly where they are while you add a finger on the C string's second fret. From D minor to B flat, your index finger stays on the E string's first fret and extends across the A string, while the C string stays fretted at the second fret. The first new circles hide pivots too: A to F-sharp minor keeps both fingers while the ring joins on the E string's second fret, and B flat to G minor keeps the middle on the C string's second fret and the index on the A string's first fret. The sharp and flat keys hide anchors of their own: B to E keeps the index on the A string's second fret, C minor to A flat keeps the index on the C string's third fret, and F-sharp to D-sharp minor holds three fingers while only the C string changes hands. Naming your pivots turns four separate grips into one connected hand dance.",
+          "When the shapes feel familiar, run this ladder:\n\n- **One-minute changes**: one pair, sixty seconds, count clean changes. Beat it tomorrow.\n- **Metronome ladder**: full circle at 60 bpm, one strum per beat; climb to 70, then 80 when flawless.\n- **Island strum**: down, down-up, up, down-up — one pattern per chord.\n- **Song run**: play a full verse and chorus of one song from this chapter without stopping, mistakes and all.",
+          "Five focused minutes a day on one circle beats an hour of distracted strumming — fingers build their memory while you sleep, so short daily sessions work remarkably well."
+        ]
+      },
+      {
+        "heading": "Hearing Circles in Songs",
+        "paragraphs": [
+          "Once a circle lives in your fingers, you *hear* it everywhere. Put on *Stand by Me*, count its four repeating bass stations, and strum I–vi–IV–V along in the same key. At first you will fumble the timing; within a few songs you will catch the changes earlier and earlier. Then try *Perfect* and *Blue Moon* — and *Stand by Me* in its original key of A.",
+          "Make it a game: **name that circle**. Play a 50s or doo-wop playlist and call out “circle” or “not it” inside the first verse. Check yourself by strumming along — catching the V chord leaning home a bar early means your ear is working.",
+          "The twelve major circles in this chapter cover every major key. Sibling loops — I–V–vi–IV (*Let It Be*, *No Woman No Cry*), the 12-bar blues, the Andalusian descent — reuse the same listening skill. Master these twelve and you hold the key to them all."
+        ]
+      }
+    ],
+    "summary": [
+      "You now know what harmonic circles are — repeating loops built on tension and release — and can play all twelve major circles: the 50s progression in C, the singing circle in G, the warm circle in F, flat-key B flat, big D with your first barre, A — home of *Stand by Me* — plus E flat, A flat, E, B, D flat, and F sharp to complete the set.",
+      "Keep the habit small: five minutes of slow changes, one metronome climb, and one song played by ear each week. When a fingering slips, the Chords reference holds every diagram — and the next time four chords sound pleasantly familiar, you will know why.",
+      "The chapter's second half adds the twelve minor-key twins — one i–VI–III–VII loop per minor key, from C minor to B minor — each with its own diatonic table in the explorer."
+    ]
+  }
+}

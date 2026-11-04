@@ -1,0 +1,216 @@
+name: Deploy to Railway
+
+# Merge-to-main deploys both services. Service names/environment come from the
+# `prod` GitHub Environment vars; auth is the RAILWAY_TOKEN secret in `prod`
+# (Railway project token scoped to the `production` Railway environment).
+# Every job declares `environment: prod` — without it, secrets/vars resolve empty.
+on:
+  push:
+    branches: [main]
+    # Docs/spec-only pushes must NOT rebuild production (both services redeploy
+    # on every main push otherwise; observed on a tasks.md-only push). Workflow
+    # + code changes still trigger.
+    paths-ignore: ['specs/**', '**/*.md', '.specify/**', '.claude/**']
+  # Manual (re-)deploy: usable once this file exists on `main` (GitHub only
+  # registers workflows present on the default branch, so no pre-merge dispatch
+  # from the feature branch — the PR #1 merge itself is the first token-path
+  # proof). Dispatching from any other branch later requires temporarily
+  # allowing that branch in the `prod` deployment-branch policy (restricted to
+  # `main` only otherwise) — add, dispatch, verify green, then remove.
+  workflow_dispatch:
+
+concurrency:
+  group: railway-deploy
+  cancel-in-progress: false
+
+jobs:
+  deploy-frontend:
+    name: Deploy frontend
+    runs-on: ubuntu-latest
+    environment: prod
+    env:
+      RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      # Pinned: @railway/cli v5.3.0 broke RAILWAY_TOKEN auth in CI ("Not signed
+      # in" on `railway up`). Re-pin to latest once upstream confirms the fix.
+      - name: Install Railway CLI
+        run: npm install -g @railway/cli@5.2.0
+
+      # Freshness anchor: capture the pre-deploy id so the poll below waits
+      # for a NEW deployment instead of passing on stale SUCCESS.
+      - name: Record previous frontend deployment id
+        run: |
+          SVC="${{ vars.RAILWAY_SERVICE_FRONTEND }}"
+          ENV_NAME="${{ vars.RAILWAY_ENVIRONMENT }}"
+          PREV=$(railway deployment list --service "$SVC" --environment "$ENV_NAME" --limit 1 --json | python3 -c "import json,sys; d=json.load(sys.stdin); print(d[0].get('id','NONE') if d else 'NONE')" 2>/dev/null || echo NONE)
+          echo "PREV_DEPLOYMENT_ID=$PREV" >> "$GITHUB_ENV"
+          echo "Previous frontend deployment: $PREV"
+
+      # Verified form: PATH + --path-as-root from the repo root. A bare
+      # `railway up` from inside the service subdir spins on CPU and never
+      # uploads (observed with CLI 5.35.1); the explicit form uploads in <2s.
+      # --ci streams build logs and exits non-zero on build failure; --detach
+      # returns right after upload, so a failed build would never fail the job.
+      - name: Deploy frontend service
+        run: >
+          railway up ./frontend --path-as-root
+          --service "${{ vars.RAILWAY_SERVICE_FRONTEND }}"
+          --environment "${{ vars.RAILWAY_ENVIRONMENT }}"
+          --ci
+
+      # --ci only fails on BUILD failure. Poll the deployment status so a
+      # crash-on-start / failed healthcheck also fails the job — otherwise
+      # smoke would curl the previous ACTIVE deploy and pass (false green).
+      - name: Wait for frontend deployment to succeed
+        run: |
+          SVC="${{ vars.RAILWAY_SERVICE_FRONTEND }}"
+          ENV_NAME="${{ vars.RAILWAY_ENVIRONMENT }}"
+          echo "Polling latest $SVC deployment in $ENV_NAME for SUCCESS (prev $PREV_DEPLOYMENT_ID)..."
+          UNKNOWN_COUNT=0
+          for i in $(seq 1 30); do
+            # Tolerant read: under bash -e a transient GraphQL/network failure
+            # would otherwise abort the step red with no retry. Railway stderr
+            # stays visible (no 2>/dev/null on the CLI) so auth failures
+            # ("Not signed in"/"Unauthorized") show in logs; only the python
+            # fallback parse hides its traceback.
+            DEPLOY_INFO=$(railway deployment list --service "$SVC" --environment "$ENV_NAME" --limit 1 --json | python3 -c "import json,sys; d=json.load(sys.stdin); print((d[0].get('id','NONE')+' '+d[0].get('status','UNKNOWN')) if d else 'NONE UNKNOWN')" 2>/dev/null || echo "NONE UNKNOWN")
+            ID=$(echo "$DEPLOY_INFO" | cut -d' ' -f1)
+            STATUS=$(echo "$DEPLOY_INFO" | cut -d' ' -f2)
+            # Freshness: the list endpoint can lag — if the latest id is still
+            # the pre-deploy one, keep waiting instead of passing on stale SUCCESS.
+            if [ "$ID" = "$PREV_DEPLOYMENT_ID" ]; then
+              echo "attempt $i: latest is still pre-deploy $ID, waiting for new deployment..."
+              STATUS=UNKNOWN
+            else
+              echo "attempt $i: id=$ID status=$STATUS"
+            fi
+            if [ "$STATUS" = "UNKNOWN" ]; then
+              UNKNOWN_COUNT=$((UNKNOWN_COUNT+1))
+              if [ "$UNKNOWN_COUNT" -ge 5 ]; then
+                echo "5 consecutive UNKNOWN — failing fast (auth? API? see errors above)"; exit 1
+              fi
+            else
+              UNKNOWN_COUNT=0
+            fi
+            if [ "$STATUS" = "SUCCESS" ]; then exit 0; fi
+            if [ "$STATUS" = "FAILED" ] || [ "$STATUS" = "CRASHED" ] || [ "$STATUS" = "CANCELLED" ]; then
+              echo "Deployment $STATUS — tailing deploy logs"
+              railway logs --service "$SVC" --environment "$ENV_NAME" --deployment --lines 50 || true
+              exit 1
+            fi
+            sleep 10
+          done
+          echo "Timed out waiting for SUCCESS"; exit 1
+
+  deploy-backend:
+    name: Deploy backend
+    runs-on: ubuntu-latest
+    environment: prod
+    env:
+      RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install Railway CLI
+        run: npm install -g @railway/cli@5.2.0
+
+      # Freshness anchor: capture the pre-deploy id so the poll below waits
+      # for a NEW deployment instead of passing on stale SUCCESS.
+      - name: Record previous backend deployment id
+        run: |
+          SVC="${{ vars.RAILWAY_SERVICE_BACKEND }}"
+          ENV_NAME="${{ vars.RAILWAY_ENVIRONMENT }}"
+          PREV=$(railway deployment list --service "$SVC" --environment "$ENV_NAME" --limit 1 --json | python3 -c "import json,sys; d=json.load(sys.stdin); print(d[0].get('id','NONE') if d else 'NONE')" 2>/dev/null || echo NONE)
+          echo "PREV_DEPLOYMENT_ID=$PREV" >> "$GITHUB_ENV"
+          echo "Previous backend deployment: $PREV"
+
+      - name: Deploy backend service
+        run: >
+          railway up ./backend --path-as-root
+          --service "${{ vars.RAILWAY_SERVICE_BACKEND }}"
+          --environment "${{ vars.RAILWAY_ENVIRONMENT }}"
+          --ci
+
+      # --ci only fails on BUILD failure. Poll the deployment status so a
+      # crash-on-start / failed healthcheck also fails the job — otherwise
+      # smoke would curl the previous ACTIVE deploy and pass (false green).
+      - name: Wait for backend deployment to succeed
+        run: |
+          SVC="${{ vars.RAILWAY_SERVICE_BACKEND }}"
+          ENV_NAME="${{ vars.RAILWAY_ENVIRONMENT }}"
+          echo "Polling latest $SVC deployment in $ENV_NAME for SUCCESS (prev $PREV_DEPLOYMENT_ID)..."
+          UNKNOWN_COUNT=0
+          for i in $(seq 1 30); do
+            # Tolerant read: under bash -e a transient GraphQL/network failure
+            # would otherwise abort the step red with no retry. Railway stderr
+            # stays visible (no 2>/dev/null on the CLI) so auth failures
+            # ("Not signed in"/"Unauthorized") show in logs; only the python
+            # fallback parse hides its traceback.
+            DEPLOY_INFO=$(railway deployment list --service "$SVC" --environment "$ENV_NAME" --limit 1 --json | python3 -c "import json,sys; d=json.load(sys.stdin); print((d[0].get('id','NONE')+' '+d[0].get('status','UNKNOWN')) if d else 'NONE UNKNOWN')" 2>/dev/null || echo "NONE UNKNOWN")
+            ID=$(echo "$DEPLOY_INFO" | cut -d' ' -f1)
+            STATUS=$(echo "$DEPLOY_INFO" | cut -d' ' -f2)
+            # Freshness: the list endpoint can lag — if the latest id is still
+            # the pre-deploy one, keep waiting instead of passing on stale SUCCESS.
+            if [ "$ID" = "$PREV_DEPLOYMENT_ID" ]; then
+              echo "attempt $i: latest is still pre-deploy $ID, waiting for new deployment..."
+              STATUS=UNKNOWN
+            else
+              echo "attempt $i: id=$ID status=$STATUS"
+            fi
+            if [ "$STATUS" = "UNKNOWN" ]; then
+              UNKNOWN_COUNT=$((UNKNOWN_COUNT+1))
+              if [ "$UNKNOWN_COUNT" -ge 5 ]; then
+                echo "5 consecutive UNKNOWN — failing fast (auth? API? see errors above)"; exit 1
+              fi
+            else
+              UNKNOWN_COUNT=0
+            fi
+            if [ "$STATUS" = "SUCCESS" ]; then exit 0; fi
+            if [ "$STATUS" = "FAILED" ] || [ "$STATUS" = "CRASHED" ] || [ "$STATUS" = "CANCELLED" ]; then
+              echo "Deployment $STATUS — tailing deploy logs"
+              railway logs --service "$SVC" --environment "$ENV_NAME" --deployment --lines 50 || true
+              exit 1
+            fi
+            sleep 10
+          done
+          echo "Timed out waiting for SUCCESS"; exit 1
+
+  smoke:
+    name: Smoke test production URLs
+    runs-on: ubuntu-latest
+    needs: [deploy-frontend, deploy-backend]
+    environment: prod
+    steps:
+      - name: Smoke test frontend
+        if: vars.FRONTEND_URL != ''
+        run: |
+          for i in 1 2 3 4 5 6 7 8 9 10 11 12; do
+            code=$(curl -s -o /dev/null -w "%{http_code}" "${{ vars.FRONTEND_URL }}/") || true
+            echo "attempt $i: HTTP $code"
+            [ "$code" = "200" ] && exit 0
+            sleep 20
+          done
+          echo "frontend smoke test failed"; exit 1
+
+      - name: Smoke test backend
+        if: vars.BACKEND_URL != ''
+        run: |
+          for i in 1 2 3 4 5 6 7 8 9 10 11 12; do
+            body=$(curl -s "${{ vars.BACKEND_URL }}/health") || true
+            echo "attempt $i: $body"
+            echo "$body" | grep -q '"status":"ok"' && exit 0
+            sleep 20
+          done
+          echo "backend smoke test failed"; exit 1

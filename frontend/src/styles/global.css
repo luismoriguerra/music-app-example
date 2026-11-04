@@ -1,0 +1,152 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-rock: var(--rock);
+  --color-rock-bright: var(--rock-bright);
+  --color-rock-glow: var(--rock-glow);
+  --color-rock-foreground: var(--rock-foreground);
+  --font-display:
+    ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+:root {
+  --radius: 0.625rem;
+  --background: oklch(0.975 0.008 95);
+  --foreground: oklch(0.2 0.015 260);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.2 0.015 260);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.2 0.015 260);
+  --primary: oklch(0.205 0 0);
+  --primary-foreground: oklch(0.985 0 0);
+  --secondary: oklch(0.96 0.006 95);
+  --secondary-foreground: oklch(0.205 0 0);
+  --muted: oklch(0.96 0.006 95);
+  --muted-foreground: oklch(0.47 0 0);
+  --accent: oklch(0.96 0.006 95);
+  --accent-foreground: oklch(0.205 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: oklch(0.9 0.006 95);
+  --input: oklch(0.9 0.006 95);
+  --ring: oklch(0.57 0.23 28);
+  --rock: oklch(0.57 0.23 28);
+  --rock-bright: oklch(0.65 0.21 28);
+  --rock-glow: oklch(0.57 0.23 28 / 12%);
+  --rock-foreground: oklch(0.99 0 0);
+}
+
+.dark {
+  --background: oklch(0.16 0.012 60);
+  --foreground: oklch(0.93 0.01 90);
+  --card: oklch(0.21 0.012 60);
+  --card-foreground: oklch(0.93 0.01 90);
+  --popover: oklch(0.21 0.012 60);
+  --popover-foreground: oklch(0.93 0.01 90);
+  --primary: oklch(0.922 0 0);
+  --primary-foreground: oklch(0.205 0 0);
+  --secondary: oklch(0.269 0.01 60);
+  --secondary-foreground: oklch(0.93 0.01 90);
+  --muted: oklch(0.269 0.01 60);
+  --muted-foreground: oklch(0.73 0 0);
+  --accent: oklch(0.269 0.01 60);
+  --accent-foreground: oklch(0.93 0.01 90);
+  --destructive: oklch(0.704 0.191 22.216);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.7 0.19 25);
+  --rock: oklch(0.7 0.19 25);
+  --rock-bright: oklch(0.78 0.16 30);
+  --rock-glow: oklch(0.7 0.19 25 / 16%);
+  --rock-foreground: oklch(0.16 0 0);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html,
+  body {
+    max-width: 100%;
+    overflow-x: clip;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  img,
+  svg,
+  video,
+  canvas {
+    max-width: 100%;
+  }
+  :focus-visible {
+    outline: 2px solid var(--rock);
+    outline-offset: 2px;
+  }
+}
+
+/* Reserved layout slots (FR-026/FR-027): floors that keep heroes,
+   cards, pill rows, figures, and neck frames stable while deferred
+   islands and art pop in. Single place to tune; components opt in. */
+.rock-reserve-hero {
+  min-height: 14rem;
+}
+.rock-reserve-card {
+  min-height: 9rem;
+}
+.rock-reserve-pills {
+  min-height: 3.25rem;
+}
+.rock-reserve-figure {
+  min-height: 10rem;
+}
+.rock-reserve-frame {
+  min-height: 10rem;
+}
+
+/* Rockstar stage texture: CSS-only glow wash, never blocks content (FR-027). */
+.rock-stage {
+  background-image: radial-gradient(
+    60rem 24rem at 50% -8rem,
+    var(--rock-glow),
+    transparent 70%
+  );
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .rock-stage {
+    background-image: none;
+  }
+}

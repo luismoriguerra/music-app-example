@@ -1,0 +1,45 @@
+# Copyright (c) 2026 your-org and contributors.
+# SPDX-License-Identifier: MIT
+schema_version: "1.0"
+
+extension:
+  id: deliberate
+  name: Deliberate
+  version: 0.3.0
+  description: Read-only exploration plus evidence-backed feature decision records
+  author: your-org
+  repository: https://github.com/your-org/spec-kit-deliberate
+  license: MIT
+
+requires:
+  speckit_version: ">=1.0.0"
+
+provides:
+  commands:
+    - name: speckit.deliberate.explore
+      file: commands/explore.md
+      description: Explore options read-only before spec, plan, or a decision
+    - name: speckit.deliberate.record
+      file: commands/record.md
+      description: Record, supersede, or batch-create feature decision records
+    - name: speckit.deliberate.recap
+      file: commands/recap.md
+      description: Recap decisions, open questions, and next steps for the active feature
+    - name: speckit.deliberate.triage
+      file: commands/triage.md
+      description: Triage uncertainties by impact and category across the feature tree
+  templates:
+    - name: decision-record-template
+      file: templates/decision-record-template.md
+      description: Feature-scoped decision record with evidence and revisit trigger
+  config:
+    - name: deliberate-config.yml
+      template: config-template.yml
+      description: Decisions dir, ledger heading, and platform-routing overlay
+      required: false
+
+tags:
+  - decisions
+  - exploration
+  - workflow
+  - governance

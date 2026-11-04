@@ -1,0 +1,70 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "@/layouts/Layout.astro";
+import CourseCard from "@/components/CourseCard.astro";
+import TopicGameCard from "@/components/TopicGameCard.astro";
+import { SHEET_GAME_SLUG } from "@/lib/routes";
+import Hero from "@/components/Hero.astro";
+import ViewStates from "@/components/ViewStates.astro";
+
+const courses = (await getCollection("courses")).sort(
+  (a, b) =>
+    a.data.order - b.data.order || a.data.title.localeCompare(b.data.title),
+);
+// Quick access (004 FR-001a): the Lyrics + Chords game straight from Home.
+const quickGame = (
+  await getCollection("games", (g) => g.data.slug === SHEET_GAME_SLUG)
+)[0]?.data;
+---
+
+<Layout title="Music Courses" description="Catalog of music courses">
+  <Hero
+    eyebrow="Music courses"
+    title="Start playing music today"
+    subcopy="Step-by-step ukulele courses — chords, strumming, and songs you can play from day one."
+  />
+  {quickGame && (
+    <section aria-labelledby="quick-access-heading" class="mt-6">
+      <h2
+        id="quick-access-heading"
+        class="font-display mb-3 text-lg font-bold tracking-tight"
+      >
+        Quick access
+      </h2>
+      <div
+        class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3"
+        data-testid="quick-access"
+      >
+        <TopicGameCard
+          title={quickGame.title}
+          slug={quickGame.slug}
+          courseSlug={quickGame.courseSlug}
+          kind="game"
+          description={quickGame.description}
+        />
+      </div>
+    </section>
+  )}
+  {courses.length === 0 ? (
+    <div class="mt-6">
+      <ViewStates
+        state="empty"
+        message="No courses are available yet. Check back soon."
+      />
+    </div>
+  ) : (
+    <div
+      class="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 auto-rows-fr"
+      data-testid="course-grid"
+    >
+      {courses.map((c) => (
+        <CourseCard
+          title={c.data.title}
+          slug={c.data.slug}
+          description={c.data.description}
+          cover={c.data.cover}
+        />
+      ))}
+    </div>
+  )}
+</Layout>

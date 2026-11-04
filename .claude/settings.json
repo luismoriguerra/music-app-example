@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "enableAllProjectMcpServers": true,
+  "permissions": {
+    "allow": [
+      "Bash(.specify/scripts/bash/*)",
+      "Bash(specify *)",
+      "Bash(npm run *)",
+      "Bash(npx astro *)",
+      "Bash(npx vitest *)",
+      "Bash(cd backend && infisical run --env=dev --path=/backend -- .venv/bin/pytest*)",
+      "Bash(infisical run --env=dev --path=/backend -- .venv/bin/pytest*)",
+      "Bash(uv run *)",
+      "Bash(git status)",
+      "Bash(git diff *)",
+      "Bash(git log *)",
+      "Bash(infisical run --env=dev --path=/backend -- docker compose ps)",
+      "Bash(infisical run --env=dev --path=/backend -- docker compose logs *)",
+      "Read(.env.example)",
+      "Read(**/.env.example)"
+    ],
+    "deny": [
+      "Bash(rm -rf *)",
+      "Read(.env)",
+      "Read(**/.env)",
+      "Read(.env.local)",
+      "Read(**/.env.local)",
+      "Read(.env.*.local)",
+      "Read(**/.env.*.local)",
+      "Read(.env.development)",
+      "Read(.env.production)",
+      "Read(.env.test)",
+      "Read(.env.staging)",
+      "Read(**/*.pem)",
+      "Read(.claude/settings.local.json)"
+    ]
+  }
+}

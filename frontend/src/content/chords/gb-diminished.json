@@ -1,0 +1,15 @@
+{
+  "name": "Gb / F# diminished",
+  "type": "diminished",
+  "root": "Gb",
+  "rootAlias": "F#",
+  "rootPitch": 6,
+  "topicSlug": "chords",
+  "diagram": {
+    "strings": "GCEA",
+    "frets": [2, 0, 2, 0],
+    "fingers": [1, 0, 2, 0],
+    "baseFret": 1,
+    "barres": []
+  }
+}

@@ -1,0 +1,161 @@
+---
+import type { Chord, Lesson } from "@/lib/content/schemas";
+import { renderProse, sectionSlugs } from "@/lib/lessons";
+import { ChordDiagram } from "./ChordDiagram";
+import ViewStates from "./ViewStates.astro";
+
+interface Props {
+  lesson: Lesson;
+  /** Chord name → resolved Chords reference entry (null when unresolvable). */
+  resolved: Map<string, Chord | null>;
+}
+
+const { lesson, resolved } = Astro.props;
+const slugs = sectionSlugs(lesson.sections.map((s) => s.heading));
+const anchors = ["introduction", ...slugs, "summary"];
+const chapterLinks = [
+  { href: "#introduction", label: "Introduction" },
+  ...lesson.sections.map((section, i) => ({
+    href: `#${slugs[i]}`,
+    label: section.heading,
+  })),
+  { href: "#summary", label: "Summary" },
+];
+
+// Zero-JS current-section cue (FR-015, R6): per-anchor :has(:target)
+// rules highlight the matching chapter link after navigation; the
+// [aria-current] rule is pre-wired for the deferred scrollspy island.
+// Anchors are slugified [a-z0-9-], safe to interpolate.
+const cueCss = [
+  ...anchors.map(
+    (anchor) =>
+      `[data-testid="lesson-layout"]:has(#${anchor}:target) a[href="#${anchor}"]{background-color:var(--secondary);font-weight:600;text-decoration:none;}`,
+  ),
+  `[data-testid="lesson-layout"] a[aria-current="true"]{background-color:var(--secondary);font-weight:600;text-decoration:none;}`,
+  `[data-testid="lesson-layout"] :target{outline:2px solid var(--rock);outline-offset:4px;border-radius:0.5rem;}`,
+].join("\n");
+
+/** Book prose rhythm for Markdown-rendered blocks (single column, SC-005). */
+const blockClass =
+  "lesson-block mb-4 leading-7 [&_p]:mb-3 [&_p:last-child]:mb-0 [&_ul]:mb-3 [&_ul]:ml-6 [&_ul]:list-disc [&_ul]:space-y-1";
+
+const chapterLinkClass = "block rounded px-2 py-1 hover:underline";
+---
+
+{lesson.sections.length === 0 ? (
+  <ViewStates state="empty" message="This lesson has no sections yet." />
+) : (
+  <div data-testid="lesson-layout" class="lg:flex lg:items-start lg:gap-10">
+    <style set:html={cueCss}></style>
+    <details
+      data-testid="lesson-toc-mobile"
+      class="bg-card text-card-foreground mb-8 rounded-xl border p-4 text-sm shadow-sm lg:hidden"
+    >
+      <summary class="flex min-h-11 cursor-pointer items-center font-semibold tracking-tight">
+        In this chapter — {lesson.sections.length} sections
+      </summary>
+      <nav aria-label="In this chapter" class="mt-2">
+        <ol class="space-y-1">
+          {chapterLinks.map((link) => (
+            <li>
+              <a href={link.href} class={chapterLinkClass}>
+                {link.label}
+              </a>
+            </li>
+          ))}
+        </ol>
+      </nav>
+    </details>
+    <aside class="mb-8 hidden lg:sticky lg:top-6 lg:order-2 lg:mb-0 lg:block lg:w-60 lg:shrink-0">
+      <nav
+        aria-label="In this chapter"
+        data-testid="lesson-toc"
+        class="bg-card text-card-foreground rounded-xl border p-4 text-sm shadow-sm"
+      >
+        <p class="mb-2 font-semibold tracking-tight">In this chapter</p>
+        <ol class="space-y-1">
+          {chapterLinks.map((link) => (
+            <li>
+              <a href={link.href} class={chapterLinkClass}>
+                {link.label}
+              </a>
+            </li>
+          ))}
+        </ol>
+      </nav>
+    </aside>
+    <article
+      data-testid="lesson-reader"
+      class="lesson-prose min-w-0 flex-1 max-w-[65ch] lg:order-1"
+    >
+      <div
+        id="introduction"
+        tabindex="-1"
+        class="lesson-intro mb-6 scroll-mt-6 text-lg leading-8"
+      >
+        {lesson.intro.map((paragraph) => (
+          <div class={blockClass} set:html={renderProse(paragraph)} />
+        ))}
+      </div>
+      {lesson.sections.map((section, i) => (
+        <section aria-labelledby={slugs[i]}>
+          <h2
+            id={slugs[i]}
+            tabindex="-1"
+            class="mb-4 mt-10 scroll-mt-6 text-2xl font-semibold tracking-tight"
+          >
+            {section.heading}
+          </h2>
+          {section.paragraphs.map((paragraph) => (
+            <div class={blockClass} set:html={renderProse(paragraph)} />
+          ))}
+          {section.progressions.map((progression) => (
+            <figure
+              data-testid="progression"
+              class="rock-reserve-figure bg-card text-card-foreground my-6 rounded-xl border p-5 shadow-sm"
+            >
+              <figcaption class="mb-4">
+                <h3 class="text-lg font-semibold tracking-tight">
+                  {progression.name}
+                </h3>
+                <p class="text-muted-foreground text-sm">
+                  Key of {progression.key} · {progression.degrees.join(" – ")}
+                </p>
+              </figcaption>
+              <div class="grid grid-cols-2 gap-4 sm:grid-cols-4">
+                {progression.chords.map((name) => {
+                  const chord = resolved.get(name) ?? null;
+                  return (
+                    <div class="flex flex-col items-center gap-2 text-center">
+                      <p class="text-sm font-medium">{name}</p>
+                      {chord ? (
+                        <ChordDiagram
+                          name={chord.name}
+                          diagram={chord.diagram}
+                        />
+                      ) : (
+                        <p class="text-muted-foreground text-sm">
+                          Diagram unavailable.
+                        </p>
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
+            </figure>
+          ))}
+        </section>
+      ))}
+      <section
+        id="summary"
+        tabindex="-1"
+        aria-label="Summary"
+        class="mt-10 scroll-mt-6 border-t pt-6"
+      >
+        {lesson.summary.map((paragraph) => (
+          <div class={blockClass} set:html={renderProse(paragraph)} />
+        ))}
+      </section>
+    </article>
+  </div>
+)}

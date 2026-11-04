@@ -1,0 +1,14 @@
+{
+  "name": "D minor",
+  "type": "minor",
+  "root": "D",
+  "rootPitch": 2,
+  "topicSlug": "chords",
+  "diagram": {
+    "strings": "GCEA",
+    "frets": [2, 2, 1, 0],
+    "fingers": [2, 3, 1, 0],
+    "baseFret": 1,
+    "barres": []
+  }
+}

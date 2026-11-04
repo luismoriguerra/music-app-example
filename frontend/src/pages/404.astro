@@ -1,0 +1,27 @@
+---
+import Layout from "@/layouts/Layout.astro";
+---
+
+<Layout
+  title="Not found — Music Courses"
+  description="The page you requested does not exist"
+>
+  <section class="mx-auto max-w-md py-16 text-center" data-testid="not-found">
+    <p class="text-rock text-sm font-semibold uppercase tracking-[0.2em]">
+      404
+    </p>
+    <h1 class="font-display mt-2 text-3xl font-extrabold tracking-tight">
+      We couldn't find that
+    </h1>
+    <p class="text-muted-foreground mt-3">
+      The course or topic you asked for doesn't exist. It may have moved or
+      never been published.
+    </p>
+    <a
+      href="/"
+      class="bg-rock text-rock-foreground mt-6 inline-flex h-11 items-center rounded-md px-5 text-sm font-medium"
+    >
+      Back to catalog
+    </a>
+  </section>
+</Layout>

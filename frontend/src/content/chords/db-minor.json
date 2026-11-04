@@ -1,0 +1,15 @@
+{
+  "name": "Db / C# minor",
+  "type": "minor",
+  "root": "Db",
+  "rootAlias": "C#",
+  "rootPitch": 1,
+  "topicSlug": "chords",
+  "diagram": {
+    "strings": "GCEA",
+    "frets": [1, 1, 0, 4],
+    "fingers": [1, 2, 0, 4],
+    "baseFret": 1,
+    "barres": []
+  }
+}

@@ -1,0 +1,60 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "@/layouts/Layout.astro";
+import TopicGameCard from "@/components/TopicGameCard.astro";
+import Hero from "@/components/Hero.astro";
+import ViewStates from "@/components/ViewStates.astro";
+import { courseStaticPaths } from "@/lib/routes";
+
+export async function getStaticPaths() {
+  return courseStaticPaths((await getCollection("courses")).map((c) => c.data));
+}
+
+const { course } = Astro.props;
+const [topics, games] = await Promise.all([
+  getCollection("topics", (t) => t.data.courseSlug === course.slug),
+  getCollection("games", (g) => g.data.courseSlug === course.slug),
+]);
+
+const items = [
+  ...topics.map((t) => ({ ...t.data })),
+  ...games.map((g) => ({ ...g.data })),
+].sort((a, b) => a.order - b.order || a.title.localeCompare(b.title));
+---
+
+<Layout
+  title={`${course.title} — Music Courses`}
+  description={course.description}
+>
+  <nav aria-label="Breadcrumb" class="text-muted-foreground mb-4 text-sm">
+    <a href="/" class="hover:underline">
+      Courses
+    </a>
+    <span aria-hidden="true"> / </span>
+    <span aria-current="page">{course.title}</span>
+  </nav>
+  <Hero eyebrow="Course" title={course.title} subcopy={course.description} />
+  {items.length === 0 ? (
+    <div class="mt-6">
+      <ViewStates
+        state="empty"
+        message="This course has no topics or games yet."
+      />
+    </div>
+  ) : (
+    <div
+      class="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 auto-rows-fr"
+      data-testid="topic-game-grid"
+    >
+      {items.map((item) => (
+        <TopicGameCard
+          title={item.title}
+          slug={item.slug}
+          courseSlug={item.courseSlug}
+          kind={item.kind}
+          description={item.description}
+        />
+      ))}
+    </div>
+  )}
+</Layout>

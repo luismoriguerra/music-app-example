@@ -1,0 +1,9 @@
+{
+  "title": "Lyrics + Chords",
+  "slug": "lyrics-chords",
+  "kind": "game",
+  "courseSlug": "ukulele",
+  "description": "Type a song name to generate its lyrics with ukulele chords, plus links to more sources.",
+  "rules": "Enter a song name and submit. Pick the right match when several songs share the name, then play the generated sheet. Every search is saved to history for re-opening or regenerating later.",
+  "order": 10
+}

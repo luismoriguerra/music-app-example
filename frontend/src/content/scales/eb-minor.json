@@ -1,0 +1,67 @@
+{
+  "name": "Eb / D# minor",
+  "type": "minor",
+  "root": "Eb",
+  "rootAlias": "D#",
+  "rootPitch": 3,
+  "topicSlug": "scales",
+  "notes": ["Eb", "F", "Gb", "Ab", "Bb", "Cb", "Db", "Eb"],
+  "degrees": ["1", "2", "3", "4", "5", "6", "7", "8"],
+  "intervals": "W-H-W-W-H-W-W",
+  "displaySpelling": "Eb",
+  "diagram": {
+    "strings": "GCEA",
+    "positions": [
+      {
+        "string": 1,
+        "fret": 3,
+        "order": 1,
+        "finger": 3
+      },
+      {
+        "string": 2,
+        "fret": 1,
+        "order": 2,
+        "finger": 1
+      },
+      {
+        "string": 2,
+        "fret": 2,
+        "order": 3,
+        "finger": 2
+      },
+      {
+        "string": 2,
+        "fret": 4,
+        "order": 4,
+        "finger": 4
+      },
+      {
+        "string": 3,
+        "fret": 1,
+        "order": 5,
+        "finger": 1
+      },
+      {
+        "string": 3,
+        "fret": 2,
+        "order": 6,
+        "finger": 2
+      },
+      {
+        "string": 3,
+        "fret": 4,
+        "order": 7,
+        "finger": 4
+      },
+      {
+        "string": 3,
+        "fret": 6,
+        "order": 8,
+        "finger": 4
+      }
+    ],
+    "baseFret": 1,
+    "positionLabel": "1st position"
+  }
+}

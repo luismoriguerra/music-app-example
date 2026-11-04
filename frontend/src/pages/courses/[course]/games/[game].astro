@@ -1,0 +1,46 @@
+---
+// Game route (004): lyrics-chords renders the SheetGenerator search island
+// (sheets open on lyrics-chords/entry.astro); every other game keeps the
+// coming-soon empty state. Unknown slugs fall through to 404.astro because
+// gameStaticPaths yields only shipped games.
+import { getCollection } from "astro:content";
+import Layout from "@/layouts/Layout.astro";
+import ViewStates from "@/components/ViewStates.astro";
+import SheetGenerator from "@/components/SheetGenerator";
+import { gameStaticPaths } from "@/lib/routes";
+
+export async function getStaticPaths() {
+  return gameStaticPaths((await getCollection("games")).map((g) => g.data));
+}
+
+const { game } = Astro.props;
+const courses = await getCollection(
+  "courses",
+  (c) => c.data.slug === game.courseSlug,
+);
+const course = courses[0]?.data;
+---
+
+<Layout title={`${game.title} — Game`} description={game.description}>
+  <nav aria-label="Breadcrumb" class="text-muted-foreground mb-4 text-sm">
+    <a href="/" class="hover:underline">
+      Courses
+    </a>
+    <span aria-hidden="true"> / </span>
+    <a href={`/courses/${game.courseSlug}`} class="hover:underline">
+      {course?.title ?? game.courseSlug}
+    </a>
+    <span aria-hidden="true"> / </span>
+    <span aria-current="page">{game.title}</span>
+  </nav>
+  <h1 class="mb-2 text-3xl font-bold tracking-tight">{game.title}</h1>
+  <p class="text-muted-foreground mb-6">{game.description}</p>
+  {game.slug === "lyrics-chords" ? (
+    <SheetGenerator
+      client:visible
+      gamePath={`/courses/${game.courseSlug}/games/${game.slug}`}
+    />
+  ) : (
+    <ViewStates state="empty" message="This game is coming soon." />
+  )}
+</Layout>

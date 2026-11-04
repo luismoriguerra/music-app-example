@@ -1,0 +1,40 @@
+services:
+  db:
+    image: pgvector/pgvector:pg17
+    environment:
+      POSTGRES_DB: ${DB_NAME:-music_app}
+      POSTGRES_USER: ${DB_USER:-music}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:?DB_PASSWORD missing, run via infisical run --env=dev --path=/backend}
+    ports:
+      - "${DB_PORT:-5432}:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER:-music} -d ${DB_NAME:-music_app}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  api:
+    build: ./backend
+    environment:
+      DB_HOST: db
+      DB_PORT: "5432"
+      DB_NAME: ${DB_NAME:-music_app}
+      DB_USER: ${DB_USER:-music}
+      DB_PASSWORD: ${DB_PASSWORD:?DB_PASSWORD missing, run via infisical run --env=dev --path=/backend}
+      AGENTOS_ENABLED: ${AGENTOS_ENABLED:-false}
+      OPENROUTER_API_KEY: ${OPENROUTER_API_KEY:-}
+      SECOND_VOICE_MODEL_ID: ${SECOND_VOICE_MODEL_ID:-}
+      YOUTUBE_API_KEY: ${YOUTUBE_API_KEY:-}
+      GENIUS_ACCESS_TOKEN: ${GENIUS_ACCESS_TOKEN:-}
+      CORS_ORIGINS: ${CORS_ORIGINS:-http://localhost:4321,http://127.0.0.1:4321}
+      OWNER_ID: ${OWNER_ID:-owner}
+    ports:
+      - "${API_PORT:-8000}:8000"
+    depends_on:
+      db:
+        condition: service_healthy
+
+volumes:
+  pgdata:

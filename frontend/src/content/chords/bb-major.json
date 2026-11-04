@@ -1,0 +1,15 @@
+{
+  "name": "Bb / A# major",
+  "type": "major",
+  "root": "Bb",
+  "rootAlias": "A#",
+  "rootPitch": 10,
+  "topicSlug": "chords",
+  "diagram": {
+    "strings": "GCEA",
+    "frets": [3, 2, 1, 1],
+    "fingers": [3, 2, 1, 1],
+    "baseFret": 1,
+    "barres": []
+  }
+}

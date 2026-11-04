@@ -1,0 +1,85 @@
+---
+import "@/styles/global.css";
+import { ThemeToggle } from "@/components/ThemeToggle";
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = "Music course catalog" } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{title}</title>
+    <script is:inline>
+      try {
+        const stored = localStorage.getItem("music-app-example:theme");
+        const pref =
+          stored === "light" || stored === "system" ? stored : "dark";
+        const dark =
+          pref === "dark" ||
+          (pref === "system" &&
+            window.matchMedia("(prefers-color-scheme: dark)").matches);
+        document.documentElement.classList.toggle("dark", dark);
+      } catch {
+        // Storage unavailable (private mode): keep the SSR dark default.
+      }
+    </script>
+  </head>
+  <body class="flex min-h-dvh flex-col antialiased">
+    <header class="bg-background/80 sticky top-0 z-40 border-b backdrop-blur">
+      <nav
+        class="mx-auto flex w-full max-w-6xl items-center gap-4 px-4 py-2"
+        aria-label="Primary"
+      >
+        <a
+          href="/"
+          data-astro-prefetch
+          aria-label="Music Courses home"
+          class="font-display inline-flex min-h-11 items-center gap-2 text-lg font-extrabold tracking-tight"
+        >
+          <span
+            aria-hidden="true"
+            class="bg-rock inline-block size-3 rounded-full"
+          ></span>
+          Music Courses
+        </a>
+        <a
+          href="/"
+          data-astro-prefetch
+          class="text-muted-foreground hover:text-foreground inline-flex min-h-11 items-center text-sm font-medium"
+        >
+          Courses
+        </a>
+        <span class="ml-auto inline-flex items-center">
+          <ThemeToggle client:idle />
+        </span>
+      </nav>
+    </header>
+    <main class="mx-auto w-full max-w-6xl min-w-0 flex-1 px-4 py-8">
+      <slot />
+    </main>
+    <footer class="border-t">
+      <div class="mx-auto flex w-full max-w-6xl flex-wrap items-center gap-x-6 gap-y-2 px-4 py-6 text-sm">
+        <a href="/" class="font-display font-bold tracking-tight">
+          Music Courses
+        </a>
+        <nav class="flex gap-4" aria-label="Footer">
+          <a href="/" class="text-muted-foreground hover:text-foreground">
+            Catalog
+          </a>
+          <a href="/" class="text-muted-foreground hover:text-foreground">
+            Courses
+          </a>
+        </nav>
+      </div>
+    </footer>
+  </body>
+</html>

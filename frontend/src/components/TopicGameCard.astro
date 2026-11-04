@@ -1,0 +1,38 @@
+---
+interface Props {
+  title: string;
+  slug: string;
+  courseSlug: string;
+  kind: "topic" | "game";
+  description: string;
+}
+
+const { title, slug, courseSlug, kind, description } = Astro.props;
+const kindLabel = kind === "topic" ? "Topic" : "Game";
+const href = `/courses/${courseSlug}/${kind === "topic" ? "topics" : "games"}/${slug}`;
+---
+
+<article
+  data-testid="topic-game-card"
+  data-kind={kind}
+  class="rock-reserve-card bg-card text-card-foreground relative flex h-full flex-col gap-3 overflow-hidden rounded-xl border p-5 shadow-sm transition-shadow hover:shadow-md has-[a:focus-visible]:ring-2 has-[a:focus-visible]:ring-rock has-[a:focus-visible]:ring-offset-2 has-[a:focus-visible]:ring-offset-background"
+>
+  <span aria-hidden="true" class="bg-rock absolute inset-x-0 top-0 h-1"></span>
+  <span class="bg-secondary text-secondary-foreground w-fit rounded-full px-2.5 py-0.5 text-xs font-medium uppercase tracking-wide">
+    {kindLabel}
+  </span>
+  <div>
+    <h2 class="text-lg font-semibold leading-tight">{title}</h2>
+    <p class="text-muted-foreground mt-1 text-sm">{description}</p>
+  </div>
+  <span class="bg-primary text-primary-foreground mt-auto inline-flex min-h-11 items-center justify-center rounded-md px-4 text-sm font-medium">
+    <a
+      href={href}
+      data-astro-prefetch="viewport"
+      aria-label={`Open ${title} ${kindLabel.toLowerCase()}`}
+      class="after:absolute after:inset-0 focus-visible:outline-none"
+    >
+      Open {kindLabel.toLowerCase()}
+    </a>
+  </span>
+</article>

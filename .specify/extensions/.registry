@@ -1,0 +1,22 @@
+{
+  "schema_version": "1.0",
+  "extensions": {
+    "deliberate": {
+      "version": "0.3.0",
+      "source": "local",
+      "manifest_hash": "sha256:734ab0445ee51341dba4486c12d904c5ff95196a86d987be934cd43d4c55d46b",
+      "enabled": true,
+      "priority": 10,
+      "registered_commands": {
+        "claude": [
+          "speckit.deliberate.explore",
+          "speckit.deliberate.record",
+          "speckit.deliberate.recap",
+          "speckit.deliberate.triage"
+        ]
+      },
+      "registered_skills": [],
+      "installed_at": "2026-09-16T20:35:27.366038+00:00"
+    }
+  }
+}

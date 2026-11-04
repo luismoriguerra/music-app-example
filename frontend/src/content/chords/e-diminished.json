@@ -1,0 +1,14 @@
+{
+  "name": "E diminished",
+  "type": "diminished",
+  "root": "E",
+  "rootPitch": 4,
+  "topicSlug": "chords",
+  "diagram": {
+    "strings": "GCEA",
+    "frets": [0, 4, 0, 1],
+    "fingers": [0, 2, 0, 1],
+    "baseFret": 1,
+    "barres": []
+  }
+}

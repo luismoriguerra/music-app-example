@@ -1,0 +1,15 @@
+{
+  "name": "Eb / D# minor",
+  "type": "minor",
+  "root": "Eb",
+  "rootAlias": "D#",
+  "rootPitch": 3,
+  "topicSlug": "chords",
+  "diagram": {
+    "strings": "GCEA",
+    "frets": [3, 3, 2, 1],
+    "fingers": [3, 4, 2, 1],
+    "baseFret": 1,
+    "barres": []
+  }
+}

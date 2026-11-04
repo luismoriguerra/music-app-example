@@ -1,0 +1,15 @@
+{
+  "name": "Db / C# diminished",
+  "type": "diminished",
+  "root": "Db",
+  "rootAlias": "C#",
+  "rootPitch": 1,
+  "topicSlug": "chords",
+  "diagram": {
+    "strings": "GCEA",
+    "frets": [0, 4, 0, 4],
+    "fingers": [0, 1, 0, 2],
+    "baseFret": 1,
+    "barres": []
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "name": "C minor",
+  "type": "minor",
+  "root": "C",
+  "rootPitch": 0,
+  "topicSlug": "chords",
+  "diagram": {
+    "strings": "GCEA",
+    "frets": [0, 3, 3, 3],
+    "fingers": [0, 1, 2, 3],
+    "baseFret": 1,
+    "barres": []
+  }
+}

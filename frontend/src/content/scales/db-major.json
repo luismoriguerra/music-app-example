@@ -1,0 +1,67 @@
+{
+  "name": "Db / C# major",
+  "type": "major",
+  "root": "Db",
+  "rootAlias": "C#",
+  "rootPitch": 1,
+  "topicSlug": "scales",
+  "notes": ["Db", "Eb", "F", "Gb", "Ab", "Bb", "C", "Db"],
+  "degrees": ["1", "2", "3", "4", "5", "6", "7", "8"],
+  "intervals": "W-W-H-W-W-W-H",
+  "displaySpelling": "Db",
+  "diagram": {
+    "strings": "GCEA",
+    "positions": [
+      {
+        "string": 1,
+        "fret": 1,
+        "order": 1,
+        "finger": 1
+      },
+      {
+        "string": 1,
+        "fret": 3,
+        "order": 2,
+        "finger": 3
+      },
+      {
+        "string": 2,
+        "fret": 1,
+        "order": 3,
+        "finger": 1
+      },
+      {
+        "string": 2,
+        "fret": 2,
+        "order": 4,
+        "finger": 2
+      },
+      {
+        "string": 2,
+        "fret": 4,
+        "order": 5,
+        "finger": 4
+      },
+      {
+        "string": 3,
+        "fret": 1,
+        "order": 6,
+        "finger": 1
+      },
+      {
+        "string": 3,
+        "fret": 3,
+        "order": 7,
+        "finger": 3
+      },
+      {
+        "string": 3,
+        "fret": 4,
+        "order": 8,
+        "finger": 4
+      }
+    ],
+    "baseFret": 1,
+    "positionLabel": "1st position"
+  }
+}

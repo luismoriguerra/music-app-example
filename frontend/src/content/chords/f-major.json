@@ -1,0 +1,14 @@
+{
+  "name": "F major",
+  "type": "major",
+  "root": "F",
+  "rootPitch": 5,
+  "topicSlug": "chords",
+  "diagram": {
+    "strings": "GCEA",
+    "frets": [2, 0, 1, 0],
+    "fingers": [2, 0, 1, 0],
+    "baseFret": 1,
+    "barres": []
+  }
+}

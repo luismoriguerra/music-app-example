@@ -1,0 +1,14 @@
+{
+  "name": "D diminished",
+  "type": "diminished",
+  "root": "D",
+  "rootPitch": 2,
+  "topicSlug": "chords",
+  "diagram": {
+    "strings": "GCEA",
+    "frets": [7, 5, 4, 5],
+    "fingers": [4, 2, 1, 3],
+    "baseFret": 4,
+    "barres": []
+  }
+}

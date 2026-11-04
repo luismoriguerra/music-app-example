@@ -1,0 +1,5 @@
+version: 1
+general: {}
+secrets-management:
+  project-id: 00000000-0000-0000-0000-000000000000
+  environment: dev

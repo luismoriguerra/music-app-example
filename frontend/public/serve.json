@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "courses/:course/games/lyrics-chords/:entry",
+      "destination": "/courses/:course/games/lyrics-chords/entry/index.html"
+    }
+  ]
+}

@@ -1,0 +1,75 @@
+---
+/**
+ * View-state partials (FR-016/FR-022): render exactly one of loading /
+ * empty / error. Ready-state content is rendered by the caller via <slot />.
+ * Rockstar styling only — props, states, and behavior unchanged.
+ */
+type State = "loading" | "empty" | "error";
+
+interface Props {
+  state: State;
+  message?: string;
+  retryHref?: string;
+  retryLabel?: string;
+}
+
+const {
+  state,
+  message,
+  retryHref = "",
+  retryLabel = "Try again",
+} = Astro.props as Props;
+
+const defaults: Record<State, string> = {
+  loading: "Loading…",
+  empty: "Nothing to show yet.",
+  error: "Something went wrong.",
+};
+const text = message ?? defaults[state];
+---
+
+{state === "loading" && (
+  <div
+    role="status"
+    aria-live="polite"
+    data-state="loading"
+    class="text-muted-foreground flex items-center gap-2 py-8 text-sm"
+  >
+    <span
+      class="border-rock/30 border-t-rock size-4 animate-spin rounded-full border-2"
+      aria-hidden="true"
+    ></span>
+    <span>{text}</span>
+  </div>
+)}
+
+{state === "empty" && (
+  <div
+    data-state="empty"
+    class="text-muted-foreground rounded-xl border border-dashed p-8 text-center text-sm"
+  >
+    <span
+      aria-hidden="true"
+      class="bg-rock mx-auto mb-3 block h-1 w-10 rounded-full"
+    ></span>
+    <p>{text}</p>
+  </div>
+)}
+
+{state === "error" && (
+  <div
+    role="alert"
+    data-state="error"
+    class="border-destructive/40 rounded-xl border p-6 text-center text-sm"
+  >
+    <p class="mb-3">{text}</p>
+    {retryHref && (
+      <a
+        href={retryHref}
+        class="bg-rock text-rock-foreground inline-flex h-11 items-center rounded-md px-4 text-sm font-medium"
+      >
+        {retryLabel}
+      </a>
+    )}
+  </div>
+)}

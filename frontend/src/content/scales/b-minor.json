@@ -1,0 +1,66 @@
+{
+  "name": "B minor",
+  "type": "minor",
+  "root": "B",
+  "rootPitch": 11,
+  "topicSlug": "scales",
+  "notes": ["B", "C#", "D", "E", "F#", "G", "A", "B"],
+  "degrees": ["1", "2", "3", "4", "5", "6", "7", "8"],
+  "intervals": "W-H-W-W-H-W-W",
+  "displaySpelling": "B",
+  "diagram": {
+    "strings": "GCEA",
+    "positions": [
+      {
+        "string": 0,
+        "fret": 4,
+        "order": 1,
+        "finger": 4
+      },
+      {
+        "string": 1,
+        "fret": 1,
+        "order": 2,
+        "finger": 1
+      },
+      {
+        "string": 1,
+        "fret": 2,
+        "order": 3,
+        "finger": 2
+      },
+      {
+        "string": 2,
+        "fret": 0,
+        "order": 4,
+        "finger": 0
+      },
+      {
+        "string": 2,
+        "fret": 2,
+        "order": 5,
+        "finger": 2
+      },
+      {
+        "string": 2,
+        "fret": 3,
+        "order": 6,
+        "finger": 3
+      },
+      {
+        "string": 3,
+        "fret": 0,
+        "order": 7,
+        "finger": 0
+      },
+      {
+        "string": 3,
+        "fret": 2,
+        "order": 8,
+        "finger": 2
+      }
+    ],
+    "baseFret": 1,
+    "positionLabel": "1st position"
+  }
+}

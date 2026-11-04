@@ -1,0 +1,21 @@
+# Never upload: deps, build output, caches, VCS, local secrets
+node_modules/
+**/node_modules/
+.venv/
+**/.venv/
+.git/
+dist/
+**/dist/
+.astro/
+**/.astro/
+coverage/
+__pycache__/
+**/__pycache__/
+.pytest_cache/
+**/.pytest_cache/
+.ruff_cache/
+**/.ruff_cache/
+*.egg-info/
+**/*.egg-info/
+.env
+.env.local

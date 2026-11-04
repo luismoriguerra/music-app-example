@@ -1,0 +1,41 @@
+# Secrets & local config — never commit
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Claude Code — local overrides only (project settings.json IS committed)
+.claude/settings.local.json
+
+# Spec Kit — extension download cache (extensions themselves ARE committed)
+.specify/extensions/.cache/
+
+# Node / Astro (frontend/)
+node_modules/
+frontend/dist/
+frontend/.astro/
+*.log
+
+# Python (backend/)
+__pycache__/
+*.py[cod]
+backend/.venv/
+backend/.pytest_cache/
+backend/*.db
+backend/*.sqlite*
+
+# OS / editors
+.DS_Store
+.idea/
+.vscode/*
+!.vscode/extensions.json
+
+# frontend build/test output
+frontend/coverage/
+backend/*.egg-info/
+
+# Terraform (backend/infra/): provider cache and plaintext backend config
+.terraform/
+*.tfstate
+*.tfstate.*

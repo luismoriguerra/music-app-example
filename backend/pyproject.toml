@@ -1,0 +1,51 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "music-app-example-backend"
+version = "0.1.0"
+description = "AgentOS backend scaffold for the music course catalog (v1: health only, no feature traffic)."
+requires-python = ">=3.12"
+dependencies = [
+  "agno[os]>=2.0,<3",
+  "fastapi>=0.115,<1",
+  "uvicorn[standard]>=0.30,<1",
+  "psycopg[binary]>=3.2,<4",
+  "sqlalchemy>=2.0,<3",
+  "pgvector>=0.3,<1",
+  "httpx>=0.27,<1",
+  "openai>=1,<2",
+  "ddgs>=9,<10",
+  "beautifulsoup4>=4.12,<5",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8,<9",
+  "pyyaml>=6,<7",
+  "ruff>=0.6,<1",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+src = ["app", "agents", "evals", "tests", "."]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "N", "W"]
+
+[tool.ruff.format]
+quote-style = "double"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+
+# Explicit packaging: flat layout has multiple top-level packages, so automatic
+# discovery refuses to build. Keep tests/ out of the installed distribution.
+[tool.setuptools.packages.find]
+include = ["app*", "agents*", "evals*"]
+
+[tool.setuptools]
+py-modules = ["db", "db_models"]

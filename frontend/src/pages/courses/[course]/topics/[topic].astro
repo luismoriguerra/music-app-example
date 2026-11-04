@@ -1,0 +1,88 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "@/layouts/Layout.astro";
+import ChordList from "@/components/ChordList";
+import CircleList from "@/components/CircleList";
+import ScaleList from "@/components/ScaleList";
+import LessonReader from "@/components/LessonReader.astro";
+import ViewStates from "@/components/ViewStates.astro";
+import { collectLessonCircles } from "@/lib/circles";
+import { resolveLessonChords } from "@/lib/lessons";
+import { topicStaticPaths } from "@/lib/routes";
+
+export async function getStaticPaths() {
+  return topicStaticPaths((await getCollection("topics")).map((t) => t.data));
+}
+
+const { topic } = Astro.props;
+const courses = await getCollection(
+  "courses",
+  (c) => c.data.slug === topic.courseSlug,
+);
+const course = courses[0]?.data;
+const chords = (
+  await getCollection("chords", (c) => c.data.topicSlug === topic.slug)
+).map((c) => c.data);
+const scales = (
+  await getCollection("scales", (c) => c.data.topicSlug === topic.slug)
+).map((c) => c.data);
+// Lesson topics resolve progression chords against the full reference.
+const referenceChords = (await getCollection("chords")).map((c) => c.data);
+// Circles topics collect progressions from same-course lessons (FR-012).
+const explorerCircles =
+  topic.format === "circles"
+    ? collectLessonCircles(
+        (
+          await getCollection(
+            "topics",
+            (t) => t.data.courseSlug === topic.courseSlug,
+          )
+        ).map((t) => t.data),
+      )
+    : [];
+const resolved =
+  topic.format === "lesson" && topic.lesson
+    ? resolveLessonChords(topic.lesson, referenceChords)
+    : new Map();
+---
+
+<Layout
+  title={`${topic.title} — ${course?.title ?? "Course"}`}
+  description={topic.description}
+>
+  <nav aria-label="Breadcrumb" class="text-muted-foreground mb-4 text-sm">
+    <a href="/" class="hover:underline">
+      Courses
+    </a>
+    <span aria-hidden="true"> / </span>
+    <a href={`/courses/${topic.courseSlug}`} class="hover:underline">
+      {course?.title ?? topic.courseSlug}
+    </a>
+    <span aria-hidden="true"> / </span>
+    <span aria-current="page">{topic.title}</span>
+  </nav>
+  <h1 class="mb-2 text-3xl font-bold tracking-tight">{topic.title}</h1>
+  <p class="text-muted-foreground mb-6">{topic.description}</p>
+  {topic.format === "lesson" ? (
+    topic.lesson ? (
+      <LessonReader lesson={topic.lesson} resolved={resolved} />
+    ) : (
+      <ViewStates state="empty" message="This lesson has no content yet." />
+    )
+  ) : topic.format === "circles" ? (
+    <CircleList
+      client:visible
+      circles={explorerCircles}
+      chords={referenceChords}
+    />
+  ) : topic.format === "scales" ? (
+    <ScaleList client:visible scales={scales} />
+  ) : chords.length === 0 ? (
+    <ViewStates
+      state="empty"
+      message="No chords have been added to this topic yet."
+    />
+  ) : (
+    <ChordList client:visible chords={chords} />
+  )}
+</Layout>

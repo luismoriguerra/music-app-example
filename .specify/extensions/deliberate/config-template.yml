@@ -1,0 +1,24 @@
+# Copyright (c) 2026 your-org and contributors.
+# SPDX-License-Identifier: MIT
+# Deliberate extension configuration.
+# Copy to deliberate-config.yml and customize. Layered with environment
+# overrides (SPECKIT_DELIBERATE_*) where your tooling supports them.
+
+# Directory (relative to the feature dir) holding DR files.
+decisions_dir: decisions
+
+# Heading in spec.md under which the Decision records ledger lives.
+ledger_heading: "### Decision records"
+
+# Append a tasks.md subtask referencing each new DR.
+task_enabled: true
+
+# Evidence bar every DR must clear.
+evidence_rule: ">=1 file:line or measured query result"
+
+# Platform routing overlay. Empty by default: with no adr_command and no
+# platform_signals, platform-scoped findings are reported in chat instead of
+# delegated. Projects with an ADR workflow set these (see docs/platform-overlay-example.md).
+platform_routing:
+  adr_command: ""
+  platform_signals: []

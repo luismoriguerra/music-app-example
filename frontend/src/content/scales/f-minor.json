@@ -1,0 +1,66 @@
+{
+  "name": "F minor",
+  "type": "minor",
+  "root": "F",
+  "rootPitch": 5,
+  "topicSlug": "scales",
+  "notes": ["F", "G", "Ab", "Bb", "C", "Db", "Eb", "F"],
+  "degrees": ["1", "2", "3", "4", "5", "6", "7", "8"],
+  "intervals": "W-H-W-W-H-W-W",
+  "displaySpelling": "F",
+  "diagram": {
+    "strings": "GCEA",
+    "positions": [
+      {
+        "string": 2,
+        "fret": 1,
+        "order": 1,
+        "finger": 1
+      },
+      {
+        "string": 2,
+        "fret": 3,
+        "order": 2,
+        "finger": 3
+      },
+      {
+        "string": 2,
+        "fret": 4,
+        "order": 3,
+        "finger": 4
+      },
+      {
+        "string": 2,
+        "fret": 6,
+        "order": 4,
+        "finger": 4
+      },
+      {
+        "string": 1,
+        "fret": 0,
+        "order": 5,
+        "finger": 0
+      },
+      {
+        "string": 1,
+        "fret": 1,
+        "order": 6,
+        "finger": 1
+      },
+      {
+        "string": 1,
+        "fret": 3,
+        "order": 7,
+        "finger": 3
+      },
+      {
+        "string": 1,
+        "fret": 5,
+        "order": 8,
+        "finger": 4
+      }
+    ],
+    "baseFret": 1,
+    "positionLabel": "1st position"
+  }
+}

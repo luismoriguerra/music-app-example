@@ -1,0 +1,36 @@
+---
+// Dedicated sheet page shell (004 FR-009, game-route.md): entry ids are
+// per-user, so one static shell is served for every
+// /courses/<c>/games/lyrics-chords/<entry_id> via a host rewrite
+// (public/serve.json in prod, the dev middleware in astro.config.mjs). The
+// SheetEntry island reads the id from the path and owns breadcrumb + states.
+import { getCollection } from "astro:content";
+import Layout from "@/layouts/Layout.astro";
+import SheetEntry from "@/components/SheetEntry";
+import { sheetEntryShellStaticPaths } from "@/lib/routes";
+
+export async function getStaticPaths() {
+  return sheetEntryShellStaticPaths(
+    (await getCollection("games")).map((g) => g.data),
+  );
+}
+
+const { game } = Astro.props;
+const courses = await getCollection(
+  "courses",
+  (c) => c.data.slug === game.courseSlug,
+);
+const course = courses[0]?.data;
+const chords = (await getCollection("chords")).map((c) => c.data);
+---
+
+<Layout title={`${game.title} — Song sheet`} description={game.description}>
+  <SheetEntry
+    client:load
+    gamePath={`/courses/${game.courseSlug}/games/${game.slug}`}
+    gameTitle={game.title}
+    coursePath={`/courses/${game.courseSlug}`}
+    courseTitle={course?.title ?? game.courseSlug}
+    catalog={chords}
+  />
+</Layout>

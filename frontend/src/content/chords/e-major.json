@@ -1,0 +1,14 @@
+{
+  "name": "E major",
+  "type": "major",
+  "root": "E",
+  "rootPitch": 4,
+  "topicSlug": "chords",
+  "diagram": {
+    "strings": "GCEA",
+    "frets": [4, 4, 4, 2],
+    "fingers": [2, 3, 4, 1],
+    "baseFret": 1,
+    "barres": []
+  }
+}

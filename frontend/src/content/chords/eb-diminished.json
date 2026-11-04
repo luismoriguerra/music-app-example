@@ -1,0 +1,15 @@
+{
+  "name": "Eb / D# diminished",
+  "type": "diminished",
+  "root": "Eb",
+  "rootAlias": "D#",
+  "rootPitch": 3,
+  "topicSlug": "chords",
+  "diagram": {
+    "strings": "GCEA",
+    "frets": [2, 3, 2, 0],
+    "fingers": [1, 3, 2, 0],
+    "baseFret": 1,
+    "barres": []
+  }
+}
